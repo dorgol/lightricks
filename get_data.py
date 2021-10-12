@@ -1,6 +1,6 @@
 import pandas as pd
 
-source_dir = 'C:/Users/dorgo/Downloads/df_lightricks'
+source_dir = 'https://raw.githubusercontent.com/dorgol/lightricks/main/'
 
 df = pd.read_csv(f'{source_dir}/Subscripiton_Prediction.csv')
 df[['install_date', 'device_timestamp', 'subscription_date']] = \
