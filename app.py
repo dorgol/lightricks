@@ -78,7 +78,7 @@ def main():
     Features such as "face" and "retouch" have high acceptance rate while "paint", "reshape" and 
     "vignette" have almost no acceptance. Maybe it 
     can teach us that many users use the app as a quick editing tool before posting rather than a profound tool
-    for editing photos (such as Adobe's Lightroom/Photoshop which demand higher expertise).
+    for editing photos (such as Adobe's Lightroom/Photoshop which demands higher expertise).
     \nBy observing the group of "subscriber" ("subscriber"-None-None-mean") 
     we can see some differences between subscribers
     and non; Subscribers accept more changes and spend less time on each feature on average. 
@@ -86,12 +86,12 @@ def main():
     \nSo, how much users subscribe? By looking at the subscribers ("subscribers"-None-None-Count") we can see that
     there are 6129 "id_for_vendor" (i.e users) that didn't subscribed and only 48 that did. 
     We can also see that subscribers
-    only come from 15 countries and that .
+    only come from 15 countries.
     \nThere are many more aspects that we can cover. e.g, how much time it takes to a subscriber to subscribe etc.''')
 
     st.subheader('Feature Engineering')
     st.markdown('''Thus far we analyzed some aspects of the data. In order to train a model we need numeric, 
-    informative features. The problem in the current format of the data is that it is mostly uninformative. 
+    informative features. The problem with the current format of the data is that it is mostly uninformative. 
     Many features are sparse categories and some are mere date features. We will now go over problems with the current 
     structure of the data and offer some changes.
     \n+ The **"id_for_vendor"** feature is our cluster id - 
@@ -104,8 +104,8 @@ def main():
     use we can count the total use of every feature
     by a single user and use it as a feature for our model. 
     Our second alternative is to use mixed models. In these models
-    we bring into consideration the clustered structure of our data 
-    (we will get back to this topic in the models section).
+    we bring into consideration the clustered structure of our data. We will not implement this method here due to 
+    memory issues. 
     \n + The **"Country"** feature indicates the user's country. As we saw earlier there are only 15 (out of 126) 
     countries from which users subscribed. This feature is very sparse 
     and probably doesn't carry many information within.
@@ -117,10 +117,12 @@ def main():
     and tablets. This feature can possibly reveal different uses in the app.
     \n + There are multiple columns indicating different time aspects 
     - **"device_timestamp"** indicating the time a feature
-    was used, **"usage_duration"** indicates the length of the use in a feature, 
-    **"install_date"** indicates the time of
-    installation and **"subscription_date"** is obviously indicates the time of subscription. We will use the 
-    **"usage_duration"** feature to indicate the importance of the feature. 
+    was used, 
+    - **"usage_duration"** indicates the length of the use in a feature, 
+    - **"install_date"** indicates the time of
+    installation and 
+    - **"subscription_date"** is obviously indicates the time of subscription. We will use the 
+    - **"usage_duration"** feature to indicate the importance of the feature. 
     Regarding the installation and subscription - 
     the logical thing to do would be to use it in a survival analysis; some of the non-subscribers are actually a 
     not-yet-subscribed. The model should take this into account and for that a "time to subscription" feature is needed. 
@@ -161,7 +163,7 @@ def main():
 
     st.markdown('''As we can see the results are miserable - no case was predicted as positive at all, 
     and all of the parameters of the positive 
-    class - zero precision, recall and f1-score - are zero. Yet the average precision is very high. 
+    class - precision, recall and f1-score - are zero. Yet the average precision is very high. 
     In order to deal with this problem
     we will use oversampling, undersampling, different scoring and specialized models. 
     We will use logistic regression and random forest 
